@@ -2,12 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 import { nanoid } from "nanoid";
 
-const tasksInitialState = [
-    { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-    { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-    { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-    { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-];
+// const tasksInitialState = [
+//     { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
+//     { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
+//     { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
+//     { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
+// ];
+
+const tasksInitialState = {
+  contacts: {
+    items: [
+
+    ],
+    isLoading: false,
+    error: null
+  }
+}
+
 
 // const tasksSlice = createSlice({
 //   name: "contacts",
@@ -73,10 +84,6 @@ export const tasksSlice = createSlice({
       state.error = null;
       const index = state.items.findIndex(task => task.id === action.payload);
       state.items.splice(index, 1);
-      // const index = state.items.findIndex(
-      //   task => task.id === action.payload.id !!!!!!!!!!!!!!!!!!!!редагувати
-      // );
-      state.items.splice(index, 1);
     },
     [deleteContact.rejected](state, action) {
       state.isLoading = false;
@@ -86,5 +93,5 @@ export const tasksSlice = createSlice({
 });
 
 // Експортуємо генератори екшенів та редюсер
-// export const { addTask, deleteTask } = tasksSlice.actions;
+export const { addTask, deleteTask } = tasksSlice.actions;
 export const contactsReducer = tasksSlice.reducer;

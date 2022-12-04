@@ -5,6 +5,7 @@ import { getFilter, getContacts } from '../../redux/selector';
 // import { deleteTask } from "redux/contactsSlice";
 import { deleteContact } from "redux/operations"
 
+
 export default function ContactList(task) {
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
