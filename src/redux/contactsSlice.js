@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
-import { nanoid } from "nanoid";
+
 
 // const tasksInitialState = [
 //     { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
