@@ -2,7 +2,8 @@ import { ButtonDelete, ContactEl, NewContactsList } from './ContactList.styled';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilter, getContacts } from '../../redux/selector';
-import { deleteTask } from "redux/contactsSlice";
+// import { deleteTask } from "redux/contactsSlice";
+import { deleteContact } from "redux/operations"
 
 export default function ContactList(task) {
     const contacts = useSelector(getContacts);
@@ -28,7 +29,7 @@ export default function ContactList(task) {
                     </p>
                     <ButtonDelete
                         type="button"
-                        onClick={() => dispatch(deleteTask(item.id))}
+                        onClick={() => dispatch(deleteContact(item.id))}
                     >Delete
                     </ButtonDelete>
                 </ContactEl>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 import { nanoid } from "nanoid";
 
 const tasksInitialState = [
@@ -8,31 +9,82 @@ const tasksInitialState = [
     { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const tasksSlice = createSlice({
-  name: "contacts",
+// const tasksSlice = createSlice({
+//   name: "contacts",
+//   initialState: tasksInitialState,
+//   reducers: {
+//     addTask: {
+//       reducer(state, action) {
+//         state.push(action.payload);
+//       },
+//       prepare({name, number}) {
+//         return {
+//           payload: {
+//           name,
+//           number,
+//             id: nanoid(),
+//           },
+//         };
+//       },
+//     },
+//     deleteTask(state, action) {
+//       const index = state.findIndex(task => task.id === action.payload);
+//       state.splice(index, 1);
+//     },
+//   },
+// });
+
+export const tasksSlice = createSlice({
+    name: "contacts",
   initialState: tasksInitialState,
-  reducers: {
-    addTask: {
-      reducer(state, action) {
-        state.push(action.payload);
+  extraReducers: {
+    // Код решти редюсерів
+    [fetchContacts.pending](state) {
+      state.isLoading = true;
       },
-      prepare({name, number}) {
-        return {
-          payload: {
-          name,
-          number,
-            id: nanoid(),
-          },
-        };
-      },
+    [fetchContacts.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.error = null;
+      state.items = payload;
+       },
+    [fetchContacts.rejected](state, { payload }) {
+        state.isLoading = false;
+        state.error = payload;
     },
-    deleteTask(state, action) {
-      const index = state.findIndex(task => task.id === action.payload);
-      state.splice(index, 1);
+// ------------------------------------------
+    [addContact.pending](state) {
+      state.isLoading = true;
+    },
+    [addContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+    },
+    [addContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+// -----------------------------------------
+    [deleteContact.pending](state) {
+      state.isLoading = true;
+    },
+    [deleteContact.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.items.findIndex(task => task.id === action.payload);
+      state.items.splice(index, 1);
+      // const index = state.items.findIndex(
+      //   task => task.id === action.payload.id !!!!!!!!!!!!!!!!!!!!редагувати
+      // );
+      state.items.splice(index, 1);
+    },
+    [deleteContact.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
 
 // Експортуємо генератори екшенів та редюсер
-export const { addTask, deleteTask } = tasksSlice.actions;
+// export const { addTask, deleteTask } = tasksSlice.actions;
 export const contactsReducer = tasksSlice.reducer;
