@@ -2,7 +2,6 @@ import { ButtonDelete, ContactEl, NewContactsList } from './ContactList.styled';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilter, getContacts } from '../../redux/selector';
-// import { deleteTask } from "redux/contactsSlice";
 import { deleteContact } from "redux/operations"
 
 

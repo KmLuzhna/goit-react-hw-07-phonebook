@@ -1,17 +1,15 @@
-// import { Component } from 'react';
-// import { useState, useEffect } from 'react';
-// import { nanoid } from "nanoid";
 import {ContactForm} from './ContactForm/ContactForm';
 import {Filter} from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import { Wrapper } from './ContactForm/Base.styled';
 
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "redux/operations";
 
 export const App = () => {
-
+  const store = useSelector(state => state)
+  console.log(store)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
