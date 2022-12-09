@@ -41,7 +41,9 @@ export const ContactForm = () => {
         } else if (name.trim() === '' || number.trim() === '') {
        alert("Enter the contact's name and number phone!");
         } else {
-        dispatch(addContact({name, number}))
+        dispatch(addContact({ name, number }))
+        setName("");
+        setNumber("");
     }
     }
 
@@ -49,9 +51,6 @@ export const ContactForm = () => {
     event.preventDefault();
 
     addContactToList(name, number);
-
-    setName("");
-    setNumber("");
     };
 
   return (
