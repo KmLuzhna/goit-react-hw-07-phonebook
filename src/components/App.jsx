@@ -9,7 +9,7 @@ import { fetchContacts } from "redux/operations";
 
 export const App = () => {
   const store = useSelector(state => state)
-  console.log(store)
+  // console.log(store)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
